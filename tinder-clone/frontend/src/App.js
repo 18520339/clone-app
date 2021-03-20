@@ -1,14 +1,11 @@
-import { Header, TinderCards, SwipeButtons } from './components';
-import './App.css';
+import { Header, Cards, SwipeButtons } from './components';
 
-function App() {
+export default function App() {
     return (
         <div className='app'>
             <Header />
-            <TinderCards />
+            <Cards />
             <SwipeButtons />
         </div>
     );
 }
-
-export default App;
