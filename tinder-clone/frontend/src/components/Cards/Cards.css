@@ -14,7 +14,7 @@
     width              : 600px;
     height             : 50vh;
     padding            : 20px;
-    background-color   : #fff;
+    background-color   : white;
     background-size    : cover;
     background-position: center;
     border-radius      : 20px;
@@ -25,7 +25,7 @@
     position: absolute;
     bottom  : 0;
     margin  : 10px 0;
-    color   : #fff;
+    color   : white;
 }
 
 .card-content {

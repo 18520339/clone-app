@@ -1,0 +1,29 @@
+a {
+    text-decoration: none;
+    color          : inherit;
+}
+
+.inbox {
+    display        : flex;
+    justify-content: space-between;
+    align-items    : center;
+    padding        : 20px;
+    height         : 70px;
+    border-bottom  : 1px solid #fafafa;
+}
+
+.inbox__avatar {
+    margin-right: 20px;
+}
+
+.inbox__details {
+    flex: 1;
+}
+
+.inbox__details>p {
+    color: gray;
+}
+
+.inbox__timestamp {
+    color: lightgray;
+}
