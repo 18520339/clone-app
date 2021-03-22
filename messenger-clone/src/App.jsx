@@ -14,7 +14,7 @@ export default function App() {
         document
             .querySelector('#app__bottom')
             .scrollIntoView({ behavior: 'smooth' });
-    }, [name, messages]);
+    }, [messages]);
 
     useEffect(() => {
         database
@@ -39,12 +39,14 @@ export default function App() {
                 />
                 <h1>&ensp;Welcome {name}!</h1>
             </div>
-            <FlipMove className='app__messages'>
-                {messages.map(({ id, message }) => (
-                    <Message key={id} name={name} message={message} />
-                ))}
+            <div className='app__messages'>
+                <FlipMove>
+                    {messages.map(({ id, message }) => (
+                        <Message key={id} name={name} message={message} />
+                    ))}
+                </FlipMove>
                 <div id='app__bottom' />
-            </FlipMove>
+            </div>
             <InputArea name={name} />
         </div>
     );
