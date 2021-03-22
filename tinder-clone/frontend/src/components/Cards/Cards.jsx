@@ -3,7 +3,7 @@ import TinderCard from 'react-tinder-card';
 import axios from 'axios';
 import './Cards.css';
 
-axios.defaults.baseURL = `http://localhost:7000`;
+axios.defaults.baseURL = 'https://tinder-18520339.herokuapp.com';
 export default function Cards() {
     const [people, setPeople] = useState([]);
     const onSwipe = (direction, name) => console.log('Swiped ' + name);
