@@ -1,0 +1,18 @@
+form {
+    padding   : 20px;
+    margin    : 20px;
+    background: #e9e9eb;
+}
+
+.form__control {
+    display       : flex !important;
+    flex-direction: row !important;
+}
+
+.form__input {
+    flex: 1;
+}
+
+.form__button {
+    flex: 0;
+}
