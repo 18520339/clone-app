@@ -25,7 +25,7 @@ export default function Chat() {
     const onInput = event => setText(event.target.value);
     const onSubmit = event => {
         event.preventDefault();
-        if (text.trim()) setMessages([...messages, { text }]);
+        setMessages([...messages, { text }]);
         setText('');
     };
 
@@ -61,6 +61,7 @@ export default function Chat() {
                 <button
                     type='submit'
                     className='chat__submit'
+                    disabled={!text.trim()}
                     onClick={onSubmit}
                 >
                     SEND

@@ -3,9 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import './Header.css';
 
 import IconButton from '@material-ui/core/IconButton';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import PersonIcon from '@material-ui/icons/Person';
-import ForumIcon from '@material-ui/icons/Forum';
+import {
+    ArrowBack as ArrowBackIcon,
+    Person as PersonIcon,
+    Forum as ForumIcon,
+} from '@material-ui/icons';
 
 export default function Header({ back }) {
     const history = useHistory();
