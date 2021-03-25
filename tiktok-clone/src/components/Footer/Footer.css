@@ -1,17 +1,45 @@
 .footer {
     position: relative;
-    display : flex;
-    bottom  : 100px;
-    color   : white;
+    bottom: 110px;
+    display: flex;
+    margin-left: 15px;
+    color: white;
 }
 
 .footer__text {
     flex: 1;
 }
 
+.footer__text > h4 {
+    padding-bottom: 15px;
+}
+
+.footer__text > p {
+    width: 55vw;
+    padding-bottom: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.footer__ticker > .ticker {
+    margin-left: 35px;
+    margin-right: 90px;
+    text-align: center;
+}
+
+.footer__ticker p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
 .footer__record {
-    height   : 50px;
-    filter   : invert(1);
+    position: absolute;
+    top: 60px;
+    height: 30px;
+    filter: invert(1);
     animation: spin-record infinite 5s linear;
 }
 

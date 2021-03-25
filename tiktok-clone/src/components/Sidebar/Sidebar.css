@@ -1,0 +1,11 @@
+.sidebar {
+    position: absolute;
+    top: 35%;
+    right: 0;
+    color: white;
+}
+
+.sidebar__button {
+    padding: 10px;
+    text-align: center;
+}

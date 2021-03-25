@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './Card.css';
 
-export default function Card({ children }) {
+export default function Card({ videoUrl, children }) {
     const [playing, setPlaying] = useState(false);
     const videoRef = useRef(null);
     const onVideoPress = () => {
@@ -19,7 +19,7 @@ export default function Card({ children }) {
             <video
                 loop
                 className='card__player'
-                src='https://firebasestorage.googleapis.com/v0/b/clone-app-18520339.appspot.com/o/6933401096203275521.mp4?alt=media'
+                src={videoUrl}
                 ref={videoRef}
                 onClick={onVideoPress}
             />
