@@ -1,15 +1,15 @@
 a {
     text-decoration: none;
-    color          : inherit;
+    color: inherit;
 }
 
 .inbox {
-    display        : flex;
+    display: flex;
     justify-content: space-between;
-    align-items    : center;
-    padding        : 20px;
-    height         : 70px;
-    border-bottom  : 1px solid #fafafa;
+    align-items: center;
+    padding: 20px;
+    height: 70px;
+    border-bottom: 1px solid #fafafa;
 }
 
 .inbox__avatar {
@@ -20,7 +20,7 @@ a {
     flex: 1;
 }
 
-.inbox__details>p {
+.inbox__details > p {
     color: gray;
 }
 
