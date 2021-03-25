@@ -18,6 +18,7 @@ export default function Card({ videoUrl, children }) {
         <div className='card'>
             <video
                 loop
+                playsInline
                 className='card__player'
                 src={videoUrl}
                 ref={videoRef}

@@ -4,6 +4,7 @@
     display: flex;
     margin-left: 15px;
     color: white;
+    z-index: 1;
 }
 
 .footer__text {
@@ -23,8 +24,9 @@
 }
 
 .footer__ticker > .ticker {
+    margin-top: -4px;
     margin-left: 35px;
-    margin-right: 90px;
+    margin-right: 80px;
     text-align: center;
 }
 

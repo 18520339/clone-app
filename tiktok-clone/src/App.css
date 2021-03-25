@@ -10,12 +10,13 @@ html {
 }
 
 .app__videos {
-    max-width: 600px;
-    width: 80%;
+    max-width: 450px;
+    width: 75%;
     height: 80%;
     overflow: scroll;
     border-radius: 20px;
     scroll-snap-type: y mandatory;
+    z-index: 1;
 }
 
 /* Hide scrollbar for IE, Edge and Firefox */
