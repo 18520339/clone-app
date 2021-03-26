@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import FlipMove from 'react-flip-move';
-import database from './firebase';
+
+import axios from 'axios';
+import Pusher from 'pusher-js';
 
 import { Message, InputArea } from './components';
 import './App.css';
 
+axios.defaults.baseURL = 'https://messenger-18520339.herokuapp.com';
+const pusher = new Pusher('6942286699e8989c1081', { cluster: 'ap1' });
+
 export default function App() {
     const [name, setName] = useState('');
     const [messages, setMessages] = useState([]);
+    const getMessages = () => {
+        axios
+            .get('/messenger/messages')
+            .then(res => setMessages(res.data))
+            .catch(console.error);
+    };
 
     useEffect(() => setName(prompt('Please enter your name')), []);
     useEffect(() => {
@@ -16,19 +27,11 @@ export default function App() {
             .scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
+    useEffect(() => getMessages(), []);
     useEffect(() => {
-        database
-            .collection('messages')
-            .orderBy('timestamp')
-            .onSnapshot(snapshot => {
-                setMessages(
-                    snapshot.docs.map(doc => ({
-                        id: doc.id,
-                        message: doc.data(),
-                    }))
-                );
-            });
-    }, []);
+        const channel = pusher.subscribe('messages');
+        channel.bind('newMessage', data => getMessages());
+    }, [name]);
 
     return (
         <div className='App'>
@@ -41,8 +44,12 @@ export default function App() {
             </div>
             <div className='app__messages'>
                 <FlipMove>
-                    {messages.map(({ id, message }) => (
-                        <Message key={id} name={name} message={message} />
+                    {messages.map(message => (
+                        <Message
+                            key={message._id}
+                            name={name}
+                            message={message}
+                        />
                     ))}
                 </FlipMove>
                 <div id='app__bottom' />
