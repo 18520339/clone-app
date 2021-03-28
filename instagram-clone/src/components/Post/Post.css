@@ -22,7 +22,21 @@
     object-fit: contain;
 }
 
+.post__comments {
+    padding: 20px;
+}
+
 .post__text {
     font-weight: normal;
     padding: 20px;
+    padding-top: 15px;
+}
+
+.post__comment-box {
+    display: flex;
+}
+
+.post__input {
+    flex: 1;
+    border-radius: 0%;
 }

@@ -40,6 +40,7 @@ export default function App() {
                     <Post
                         key={id}
                         postId={id}
+                        user={user}
                         username={username}
                         caption={caption}
                         imgUrl={imgUrl}
