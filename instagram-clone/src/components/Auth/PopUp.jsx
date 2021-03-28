@@ -16,9 +16,9 @@ const getModalStyle = () => {
 const useStyles = makeStyles(theme => ({
     paper: {
         position: 'absolute',
-        width: '50%',
-        maxWidth: 500,
-        padding: '20px 30px 10px',
+        maxWidth: 400,
+        width: '70%',
+        padding: '20px 30px 15px',
         backgroundColor: theme.palette.background.paper,
         borderRadius: 10,
         boxShadow: theme.shadows[5],
@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'column',
         '& > *': {
-            margin: '15px 0px',
+            margin: '10px 0px',
         },
     },
 }));

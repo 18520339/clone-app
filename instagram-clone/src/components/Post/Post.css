@@ -1,14 +1,14 @@
 .post {
     background-color: white;
-    max-width: 500px;
+    max-width: 600px;
     border: 1px solid lightgray;
-    margin-bottom: 45px;
+    margin-bottom: 20px;
 }
 
 .post__header {
     display: flex;
     align-items: center;
-    padding: 20px;
+    padding: 15px;
 }
 
 .post__avatar {

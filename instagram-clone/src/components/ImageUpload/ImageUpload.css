@@ -1,0 +1,12 @@
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    max-width: 600px;
+    width: 80%;
+    margin: 10px auto;
+}
+
+.image-upload > * {
+    margin: 10px 0px;
+    padding: 2px;
+}

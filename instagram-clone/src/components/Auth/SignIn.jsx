@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Input } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 import { auth } from '../../firebase';
 import PopUp from './PopUp';
@@ -23,19 +23,23 @@ export default function SignIn({ open, onClose }) {
 
     return (
         <PopUp open={open} onClose={onClose}>
-            <Input
+            <TextField
                 type='text'
                 name='email'
+                label='Email'
+                placeholder='email@domain.com'
+                variant='outlined'
                 value={credentials.email}
                 onChange={onInput}
-                placeholder='Email'
             />
-            <Input
+            <TextField
                 type='password'
                 name='password'
+                label='Password'
+                placeholder='Password'
+                variant='outlined'
                 value={credentials.password}
                 onChange={onInput}
-                placeholder='Password'
             />
             <Button
                 type='submit'

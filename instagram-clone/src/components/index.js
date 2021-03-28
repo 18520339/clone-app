@@ -1,3 +1,3 @@
-export { default as SignIn } from './Auth/SignIn';
-export { default as SignUp } from './Auth/SignUp';
+export { default as Header } from './Header/Header';
 export { default as Post } from './Post/Post';
+export { default as ImageUpload } from './ImageUpload/ImageUpload';

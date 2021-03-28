@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button, Input } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 
 import { auth } from '../../firebase';
 import PopUp from './PopUp';
 
-export default function SignUp({ open, onClose }) {
+export default function SignUp({ setUser, open, onClose }) {
     const [credentials, setCredentials] = useState({
         displayName: '',
         email: '',
@@ -21,32 +21,39 @@ export default function SignUp({ open, onClose }) {
         const { displayName, email, password } = credentials;
         auth.createUserWithEmailAndPassword(email, password)
             .then(authUser => authUser.user.updateProfile({ displayName }))
+            .then(authUser => setUser(authUser))
             .catch(error => alert(error.message));
         onClose();
     };
 
     return (
         <PopUp open={open} onClose={onClose}>
-            <Input
+            <TextField
                 type='text'
                 name='displayName'
+                label='Username'
+                placeholder='Username'
+                variant='outlined'
                 value={credentials.displayName}
                 onChange={onInput}
-                placeholder='Display Name'
             />
-            <Input
+            <TextField
                 type='text'
                 name='email'
+                label='Email'
+                placeholder='email@domain.com'
+                variant='outlined'
                 value={credentials.email}
                 onChange={onInput}
-                placeholder='Email'
             />
-            <Input
+            <TextField
                 type='password'
                 name='password'
+                label='Password'
+                placeholder='Password'
+                variant='outlined'
                 value={credentials.password}
                 onChange={onInput}
-                placeholder='Password'
             />
             <Button
                 type='submit'
