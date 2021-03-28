@@ -4,7 +4,7 @@ import cors from 'cors';
 import cardsRouter from './cards/cards.routes.js';
 
 const app = express();
-const connection_string = `mongodb+srv://admin:***REMOVED***@cluster0.cdr1e.mongodb.net/tinder-clone?retryWrites=true&w=majority`;
+const connection_string = `mongodb+srv://admin:qeDfGqoGNhtWuKdR@cluster0.cdr1e.mongodb.net/tinder-clone?retryWrites=true&w=majority`;
 mongoose
     .connect(connection_string, {
         useNewUrlParser: true,

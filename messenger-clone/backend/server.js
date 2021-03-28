@@ -5,7 +5,7 @@ import cors from 'cors';
 import messagesRouter from './messages/messages.routes.js';
 
 const app = express();
-const connection_string = `mongodb+srv://admin:***REMOVED***@cluster0.cdr1e.mongodb.net/messenger-clone?retryWrites=true&w=majority`;
+const connection_string = `mongodb+srv://admin:qeDfGqoGNhtWuKdR@cluster0.cdr1e.mongodb.net/messenger-clone?retryWrites=true&w=majority`;
 const pusher = new Pusher({
     appId: '1178231',
     key: '6942286699e8989c1081',
