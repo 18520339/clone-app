@@ -1,24 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import FlipMove from 'react-flip-move';
-
-import axios from 'axios';
-import Pusher from 'pusher-js';
+import database from './firebase';
 
 import { Message, InputArea } from './components';
 import './App.css';
 
-axios.defaults.baseURL = 'https://messenger-18520339.herokuapp.com';
-const pusher = new Pusher('6942286699e8989c1081', { cluster: 'ap1' });
-
 export default function App() {
     const [name, setName] = useState('');
     const [messages, setMessages] = useState([]);
-    const getMessages = () => {
-        axios
-            .get('/messenger/messages')
-            .then(res => setMessages(res.data))
-            .catch(console.error);
-    };
 
     useEffect(() => setName(prompt('Please enter your name')), []);
     useEffect(() => {
@@ -27,11 +16,19 @@ export default function App() {
             .scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    useEffect(() => getMessages(), []);
     useEffect(() => {
-        const channel = pusher.subscribe('messages');
-        channel.bind('newMessage', data => getMessages());
-    }, [name]);
+        database
+            .collection('messages')
+            .orderBy('timestamp')
+            .onSnapshot(snapshot => {
+                setMessages(
+                    snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        message: doc.data(),
+                    }))
+                );
+            });
+    }, []);
 
     return (
         <div className='App'>
@@ -44,12 +41,8 @@ export default function App() {
             </div>
             <div className='app__messages'>
                 <FlipMove>
-                    {messages.map(message => (
-                        <Message
-                            key={message._id}
-                            name={name}
-                            message={message}
-                        />
+                    {messages.map(({ id, message }) => (
+                        <Message key={id} name={name} message={message} />
                     ))}
                 </FlipMove>
                 <div id='app__bottom' />

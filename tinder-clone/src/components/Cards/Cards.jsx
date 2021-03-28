@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import TinderCard from 'react-tinder-card';
-import axios from 'axios';
+import database from '../../firebase';
 import './Cards.css';
 
-axios.defaults.baseURL = 'https://tinder-18520339.herokuapp.com';
 export default function Cards() {
     const [people, setPeople] = useState([]);
     const onSwipe = (direction, name) => console.log('Swiped ' + name);
     const onCardLeftScreen = name => console.log(name + ' left the screen');
 
     useEffect(() => {
-        axios
-            .get('/tinder/cards')
-            .then(res => setPeople(res.data))
-            .catch(console.error);
+        database.collection('people').onSnapshot(snapshot => {
+            setPeople(snapshot.docs.map(doc => doc.data()));
+        });
     }, []);
 
     return (

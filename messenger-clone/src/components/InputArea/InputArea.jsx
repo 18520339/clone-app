@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import firebase from 'firebase';
+import database from '../../firebase';
 
 import { IconButton, FormControl, Input } from '@material-ui/core';
 import SendIcon from '@material-ui/icons/Send';
@@ -10,8 +11,8 @@ export default function InputArea({ name }) {
     const onInput = event => setText(event.target.value);
     const onSubmit = event => {
         event.preventDefault();
-        const timestamp = Date.now();
-        axios.post('/messenger/messages', { name, text, timestamp });
+        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        database.collection('messages').add({ name, text, timestamp });
         setText('');
     };
 
