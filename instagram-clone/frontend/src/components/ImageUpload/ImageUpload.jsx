@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Button, Input, LinearProgress, TextField } from '@material-ui/core';
+
 import firebase from 'firebase';
+import axios from 'axios';
 
 import { storage, database } from '../../firebase';
 import './ImageUpload.css';
@@ -30,6 +32,12 @@ export default function ImageUpload({ username }) {
             .child(imageName)
             .getDownloadURL()
             .then(imgUrl => {
+                axios.post('/instagram/posts', {
+                    username,
+                    caption,
+                    imgUrl,
+                    timestamp,
+                });
                 database
                     .collection('posts')
                     .add({ username, caption, imgUrl, timestamp });

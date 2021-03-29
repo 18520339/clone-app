@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+
 const PostsSchema = mongoose.Schema({
     username: String,
     caption: String,

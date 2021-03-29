@@ -3,7 +3,7 @@ import Posts from './posts.model.js';
 export const getPosts = (req, res) => {
     return Posts.find()
         .then(posts => {
-            posts.sort((a, b) => a.timestamp - b.timestamp);
+            posts.sort((a, b) => b.timestamp - a.timestamp);
             res.status(200).json(posts);
         })
         .catch(err => res.status(500).json(err));
