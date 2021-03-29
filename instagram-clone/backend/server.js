@@ -26,9 +26,7 @@ mongoose
             .collection('posts')
             .watch()
             .on('change', change => {
-                if (change.operationType === 'insert')
-                    pusher.trigger('posts', 'newPost', { change });
-                else console.log('Unknown trigger from Pusher');
+                pusher.trigger('posts', 'newPost', { change });
             });
     })
     .catch(console.error);

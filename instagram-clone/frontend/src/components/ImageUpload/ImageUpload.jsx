@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Button, Input, LinearProgress, TextField } from '@material-ui/core';
-
-import firebase from 'firebase';
 import axios from 'axios';
 
 import { storage, database } from '../../firebase';
@@ -26,7 +24,7 @@ export default function ImageUpload({ username }) {
     };
 
     const onComplete = () => {
-        const timestamp = firebase.firestore.FieldValue.serverTimestamp();
+        const timestamp = Date.now();
         storage
             .ref('images')
             .child(imageName)
