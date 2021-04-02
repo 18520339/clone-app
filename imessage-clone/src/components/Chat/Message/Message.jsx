@@ -1,19 +1,24 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
+import { useSelector } from 'react-redux';
 import { Avatar } from '@material-ui/core';
-
+import * as timeago from 'timeago.js';
 import './Message.css';
 
-export default function Message({ id, content }) {
+const Message = forwardRef(({ content }, ref) => {
+    const { photoURL, email, message, timestamp } = content;
+    const user = useSelector(state => state.user);
+
     return (
-        <div className='message'>
-            <Avatar />
-            <p>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Optio
-                tenetur eum exercitationem et labore laborum neque sequi quis
-                quisquam consequatur doloribus dignissimos nihil obcaecati ipsa
-                dolorum cumque, libero, doloremque impedit.
-            </p>
-            <small>timestamp</small>
+        <div
+            className={`message ${user.email === email && 'message__me'}`}
+            ref={ref}
+        >
+            {user.email !== email && (
+                <Avatar className='message__photo' src={photoURL} />
+            )}
+            <p>{message}</p>
+            <small>{timeago.format(new Date(timestamp?.toDate()))}</small>
         </div>
     );
-}
+});
+export default Message;

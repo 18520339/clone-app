@@ -7,6 +7,10 @@
     margin: 15px;
 }
 
+.message__photo {
+    order: 0;
+}
+
 .message > p {
     padding: 15px;
     margin: 10px;
@@ -19,6 +23,22 @@
     position: absolute;
     bottom: -5px;
     right: 0;
-    font-size: 10px;
+    font-size: 11px;
+    white-space: nowrap;
     color: gray;
+}
+
+.message__me {
+    margin-left: auto;
+}
+
+.message__me > .message__photo {
+    order: 1;
+    margin: 15px;
+}
+
+.message__me > p {
+    margin-right: auto;
+    background-color: #3cabfa;
+    color: white;
 }

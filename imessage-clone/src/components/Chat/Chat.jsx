@@ -1,37 +1,84 @@
-import React, { useState } from 'react';
-import { IconButton } from '@material-ui/core';
+import React, { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import FlipMove from 'react-flip-move';
+
+import { Button, IconButton } from '@material-ui/core';
 import { MicNone as MicNoneIcon } from '@material-ui/icons';
+
+import firebase from 'firebase';
+import database, { auth } from '../../firebase';
 
 import Message from './Message/Message';
 import './Chat.css';
 
 export default function Chat() {
-    const [text, setText] = useState('');
+    const { chatId, chatName } = useSelector(state => state.chat);
+    const { uid, photoURL, email, displayName } = useSelector(
+        state => state.user
+    );
+
+    const [input, setInput] = useState('');
+    const [messages, setMessages] = useState([]);
+
     const onSubmit = event => {
         event.preventDefault();
-        setText('');
+        database.collection('chats').doc(chatId).collection('messages').add({
+            uid,
+            photoURL,
+            email,
+            displayName,
+            message: input,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+        setInput('');
     };
+
+    useEffect(() => {
+        document
+            .querySelector('#app__bottom')
+            .scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    useEffect(() => {
+        if (chatId)
+            database
+                .collection('chats')
+                .doc(chatId)
+                .collection('messages')
+                .orderBy('timestamp')
+                .onSnapshot(snapshot => {
+                    setMessages(
+                        snapshot.docs.map(doc => ({
+                            id: doc.id,
+                            data: doc.data(),
+                        }))
+                    );
+                });
+    }, [chatId]);
 
     return (
         <div className='chat'>
             <div className='chat__header'>
                 <h4>
-                    To: <span className='chat__name'>Channel Name</span>
+                    To: <span className='chat__name'>{chatName}</span>
                 </h4>
-                <strong>Details</strong>
+                <Button onClick={() => auth.signOut()}>Sign Out</Button>
             </div>
             <div className='chat__messages'>
-                <Message />
-                <Message />
-                <Message />
+                <FlipMove>
+                    {messages.map(({ id, data }) => (
+                        <Message key={id} content={data} />
+                    ))}
+                </FlipMove>
+                <div id='app__bottom' />
             </div>
             <div className='chat__input'>
                 <form>
                     <input
                         type='text'
                         placeholder='Enter a message...'
-                        value={text}
-                        onChange={event => setText(event.target.value)}
+                        value={input}
+                        onChange={event => setInput(event.target.value)}
                     />
                     <button onClick={onSubmit} />
                 </form>

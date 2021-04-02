@@ -4,7 +4,9 @@ import { auth, provider } from '../../firebase';
 import './Login.css';
 
 export default function Login() {
-    const onSubmit = () => auth.signInWithPopup(provider).catch(console.error);
+    const onSubmit = () => {
+        auth.signInWithRedirect(provider).catch(console.error);
+    };
     return (
         <div className='login'>
             <div className='login__logo'>

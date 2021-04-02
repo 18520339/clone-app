@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { Avatar, IconButton } from '@material-ui/core';
 import {
     RateReviewOutlined as RateReviewOutlinedIcon,
     Search as SearchIcon,
 } from '@material-ui/icons';
 
-import database, { auth } from '../../firebase';
+import { useSelector, useDispatch } from 'react-redux';
+import { setChat } from '../../redux/chatSlice';
+
+import database from '../../firebase';
 import Inbox from './Inbox/Inbox';
 import './Sidebar.css';
 
 export default function Sidebar() {
     const user = useSelector(state => state.user);
-    const [chats, setChats] = useState([]);
+    const dispatch = useDispatch();
 
+    const [inboxes, setInboxes] = useState([]);
     const onAddChat = () => {
         const chatName = prompt('Please enter a chat name');
         if (chatName) database.collection('chats').add({ chatName });
@@ -21,11 +24,18 @@ export default function Sidebar() {
 
     useEffect(() => {
         database.collection('chats').onSnapshot(snapshot => {
-            setChats(
+            if (snapshot.docs[0])
+                dispatch(
+                    setChat({
+                        chatId: snapshot.docs[0].id,
+                        chatName: snapshot.docs[0].data().chatName,
+                    })
+                );
+            setInboxes(
                 snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() }))
             );
         });
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className='sidebar'>
@@ -33,7 +43,6 @@ export default function Sidebar() {
                 <Avatar
                     className='sidebar__header-avatar'
                     src={user.photoURL}
-                    onClick={() => auth.signOut()}
                 />
                 <div className='sidebar__header-search'>
                     <SearchIcon />
@@ -44,7 +53,7 @@ export default function Sidebar() {
                 </IconButton>
             </div>
             <div className='sidebar__inboxes'>
-                {chats.map(({ id, data: { chatName } }) => (
+                {inboxes.map(({ id, data: { chatName } }) => (
                     <Inbox key={id} id={id} name={chatName} />
                 ))}
             </div>

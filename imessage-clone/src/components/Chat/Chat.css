@@ -3,13 +3,16 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     background-color: white;
 }
 
 .chat__header {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    align-items: center;
+    padding: 10px;
+    padding-left: 20px;
     background-color: #f5f5f5;
     border-bottom: 1px solid lightgray;
 }
@@ -25,22 +28,26 @@
 
 .chat__messages {
     flex: 1;
+    padding: 0px 10px;
+    overflow-y: scroll;
 }
 
 .chat__input {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 10px;
+    padding-left: 20px;
     background-color: #f5f5f5;
     border-top: 1px solid lightgray;
 }
 
 .chat__input > form {
     flex: 1;
+    display: flex;
 }
 
 .chat__input > form > input {
-    width: 98%;
+    flex: 1;
     outline-width: 0;
     border: 1px solid lightgray;
     border-radius: 50px;
