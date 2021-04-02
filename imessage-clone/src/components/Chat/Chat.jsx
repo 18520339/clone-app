@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import FlipMove from 'react-flip-move';
 
 import { Button, IconButton } from '@material-ui/core';
-import { MicNone as MicNoneIcon } from '@material-ui/icons';
+import { Send as SendIcon } from '@material-ui/icons';
 
 import firebase from 'firebase';
 import database, { auth } from '../../firebase';
@@ -22,6 +22,7 @@ export default function Chat() {
 
     const onSubmit = event => {
         event.preventDefault();
+        if (!input.trim()) return;
         database.collection('chats').doc(chatId).collection('messages').add({
             uid,
             photoURL,
@@ -80,11 +81,14 @@ export default function Chat() {
                         value={input}
                         onChange={event => setInput(event.target.value)}
                     />
-                    <button onClick={onSubmit} />
+                    <IconButton
+                        type='submit'
+                        disabled={!input.trim()}
+                        onClick={onSubmit}
+                    >
+                        <SendIcon />
+                    </IconButton>
                 </form>
-                <IconButton>
-                    <MicNoneIcon className='chat__mic' />
-                </IconButton>
             </div>
         </div>
     );
