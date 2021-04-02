@@ -1,0 +1,38 @@
+.inbox {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid lightgray;
+    cursor: pointer;
+}
+
+.inbox:hover {
+    background-color: #3e93fd;
+    color: white;
+}
+
+.inbox__info {
+    position: relative;
+    width: 100%;
+    margin-left: 15px;
+}
+
+.inbox__info > h3 {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 60%;
+}
+
+.inbox__info > p {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 200px;
+}
+
+.inbox__info > small {
+    position: absolute;
+    top: 5px;
+    right: 0;
+}
