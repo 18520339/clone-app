@@ -17,7 +17,6 @@ video {
     width: 50%;
     height: 50%;
     object-fit: cover;
-    background-color: white;
 }
 
 .main {
