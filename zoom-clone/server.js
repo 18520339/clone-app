@@ -21,8 +21,12 @@ io.on('connection', socket => {
     socket.on('JOIN_ROOM', (roomId, userId) => {
         socket.join(roomId);
         socket.broadcast.to(roomId).emit('NEW_USER', userId);
+        socket.on('MESSAGE_TO_SERVER', message => {
+            io.to(roomId).emit('MESSAGE_TO_CLIENT', message);
+        });
+        socket.on('disconnect', () => {
+            socket.broadcast.to(roomId).emit('USER_LEAVE', userId);
+        });
     });
 });
-
-const port = process.env.PORT || 7000;
-server.listen(port, () => console.log('App is running on port', port));
+server.listen(process.env.PORT || 7000);
