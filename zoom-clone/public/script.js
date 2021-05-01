@@ -17,7 +17,7 @@ const newVideoCall = call => {
 };
 
 navigator.mediaDevices
-    .getUserMedia({ video: true, audio: true })
+    .getUserMedia({ video: true, audio: false })
     .finally(stream => {
         videoStream = stream;
         addVideoStream(videoElement, stream);
